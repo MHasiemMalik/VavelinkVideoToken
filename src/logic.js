@@ -28,13 +28,23 @@ function updateVideoLayout() {
 }
 
 async function fetchToken(channel) {
+    // Get the server URL from the environment variable (set in Vercel/Netlify for deployment)
+    // Provide localhost as a fallback for local development (`npm run dev`)
+    const serverUrl = import.meta.env.VITE_TOKEN_SERVER_URL || 'http://localhost:8080';
+
+    // Log the URL being used for easier debugging
+    console.log(`Fetching token from: ${serverUrl}/get-token?channelName=${channel}`);
+
     try {
-        const response = await fetch(`http://localhost:8080/get-token?channelName=${channel}`);
-        if (!response.ok) throw new Error('Failed to fetch token');
+        // --- FIX --- Use the correct endpoint for the video app
+        const response = await fetch(`${serverUrl}/get-token?channelName=${channel}`); 
+        if (!response.ok) throw new Error(`Failed to fetch token. Status: ${response.status}`);
         const data = await response.json();
+        if (!data.token) throw new Error(`Token received from server was empty or invalid`);
         return data.token;
     } catch (error) {
         console.error("Token fetch error:", error);
+        alert(`Failed to get token from server. Check console for details.`);
         return null;
     }
 }
