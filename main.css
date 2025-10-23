@@ -1,0 +1,98 @@
+/* main.css - Corrected for Full Height */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #262626;
+    color: white;
+    font-family: sans-serif;
+}
+
+/* --- CHANGE --- 
+   Using a grid layout to make the video fill the entire screen.
+*/
+#video-streams {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* This makes the remote players' container expand to fill the grid */
+#remote-players {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+}
+
+/* This styles the dynamically created remote user's player */
+[id^="player-"] {
+    width: 100%;
+    height: 100%;
+}
+
+[id^="player-"] video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* This styles the local user's video as a small frame */
+#local-player-wrapper {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 300px;
+    height: 170px;
+    z-index: 10;
+    border: 2px solid #b366f9;
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px -1px rgba(0, 0, 0, 0.77);
+    background-color: #1a1a1a;
+}
+
+#local-player,
+#local-player video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+h2 {
+    text-align: center;
+}
+
+#controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1em;
+    z-index: 20;
+}
+
+#in-call-controls {
+    display: flex;
+    gap: 1em;
+}
+
+.control-container {
+    cursor: pointer;
+    background-color: rgb(179, 102, 249, .9);
+    padding: 15px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-container img {
+    width: 25px;
+    height: 25px;
+}
