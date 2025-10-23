@@ -1,5 +1,4 @@
 // logic.js - With Dynamic Grid Layout
-
 import AgoraRTC from "agora-rtc-sdk-ng";
 
 const APP_ID = "ce748e0828444323855aef66b05162d9";
